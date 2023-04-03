@@ -3,15 +3,14 @@ import java.util.Arrays;
 
 public class IterativeMethods {
 
-    // Розв'язок СЛАР за методом простої ітерації (Якобі)
     public double[] solveJacobi(double[][] A, double[] b, double tol) {
         int n = b.length;
-        double[] x0 = new double[n]; // Початкове наближення
-        double[] x = new double[n];  // Нове наближення
-        double[] d = new double[n];  // Діагональна матриця A
-        double[] r = new double[n];  // Матриця A без діагоналі
+        double[] x0 = new double[n];
+        double[] x = new double[n];
+        double[] d = new double[n];
+        double[] r = new double[n];
 
-        // Розбиваємо матрицю A на діагональну та недіагональну частини
+
         for (int i = 0; i < n; i++) {
             d[i] = A[i][i];
             for (int j = 0; j < n; j++) {
@@ -21,10 +20,10 @@ public class IterativeMethods {
             }
         }
 
-        int iter = 0;               // Лічильник ітерацій
-        double error = Double.MAX_VALUE; // Похибка
+        int iter = 0;
+        double error = Double.MAX_VALUE;
         while (error > tol) {
-            // Розраховуємо нове наближення x
+
             for (int i = 0; i < n; i++) {
                 double sum = b[i];
                 for (int j = 0; j < n; j++) {
@@ -35,13 +34,13 @@ public class IterativeMethods {
                 x[i] = 1.0 / d[i] * sum;
             }
 
-            // Обчислюємо похибку
+
             error = 0;
             for (int i = 0; i < n; i++) {
                 error += Math.abs(x[i] - x0[i]);
             }
 
-            // Підготовка до наступної ітерації
+
             iter++;
             x0 = Arrays.copyOf(x, n);
         }
@@ -50,16 +49,16 @@ public class IterativeMethods {
         return x;
     }
 
-    // Розв'язок СЛАР за методом Гауса-Зейделя
+
     public double[] solveGaussSeidel(double[][] A, double[] b, double tol) {
         int n = b.length;
-        double[] x0 = new double[n]; // Початкове наближення
-        double[] x = new double[n];  // Нове наближення
+        double[] x0 = new double[n];
+        double[] x = new double[n];
 
-        int iter = 0;               // Лічильник ітерацій
-        double error = Double.MAX_VALUE; // Похибка
+        int iter = 0;
+        double error = Double.MAX_VALUE;
         while (error > tol) {
-            // Розраховуємо нове наближення x
+
             for (int i = 0; i < n; i++) {
                 double sum1 = 0;
                 double sum2 = 0;
@@ -72,12 +71,11 @@ public class IterativeMethods {
                 x[i] = 1.0 / A[i][i] * (b[i] - sum1 - sum2);
             }
 
-            // Обчислюємо похибку
+
             error = 0;
             for (int i = 0; i < n; i++) {
                 error += Math.abs(x[i] - x0[i]);
             }
-
             iter++;
             x0 = Arrays.copyOf(x, n);
         }

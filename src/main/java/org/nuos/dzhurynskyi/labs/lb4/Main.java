@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         IterativeMethods iterativeMethods=new IterativeMethods();
-        // Приклад використання
+
         double[][] a = {{76, 5.8, 4.7}, {3.8, 41, 2.7}, {2.9, 2.1, 38}};
         double[] b = {101, 97, 78};
         double tol = 1e-5;
