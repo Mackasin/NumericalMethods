@@ -127,25 +127,28 @@ public class Operations {
         if (size1 <= 0 || size2 <= 0 || size3 <= 0) {
             System.out.println("Size less than 0 or equals 0");
         } else if ((size2 != size3)) {
-            System.out.println("We cant take product of matrix and vector");
+            System.out.println("We cant take product of matrix and vector, the number of rows in the vector is equal to the number of columns in the matrix.");
         } else {
+            ifWeHaveMatrixAndVector(size1, size2, size3);
+        }
+    }
 
-            int[] res = new int[size1];
-            int[][] matrix = new int[size1][size2];
-            int[] vector = new int[size3];
-            System.out.println("Enter numbers of matrix:");
-            fillMatrix(matrix);
-            System.out.println("Enter numbers of vector:");
-            fillVector(vector);
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[i].length; j++) {
-                    res[i] += matrix[i][j] * vector[j];
-                }
+    private void ifWeHaveMatrixAndVector(int size1, int size2, int size3) {
+        int[] res = new int[size1];
+        int[][] matrix = new int[size1][size2];
+        int[] vector = new int[size3];
+        System.out.println("Enter numbers of matrix:");
+        fillMatrix(matrix);
+        System.out.println("Enter numbers of vector:");
+        fillVector(vector);
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                res[i] += matrix[i][j] * vector[j];
             }
-            System.out.println("result");
-            for (int i = 0; i < res.length; i++) {
-                System.out.println(res[i]);
-            }
+        }
+        System.out.println("result");
+        for (int i = 0; i < res.length; i++) {
+            System.out.println(res[i]);
         }
     }
 
@@ -180,26 +183,31 @@ public class Operations {
 
         if (size1 <= 0 || size2 <= 0 || size3 <= 0 || size4 <= 0) {
             System.out.println("Size less than 0 or equals 0");
-        } else if ((size2 != size3)) {
-            System.out.println("We cant take product of matrix1 and matrix2");
+        } else if(size1 == 1 || size2 == 1 || size3 == 1){
+            System.out.println("Size cannot equals 1 in matrix1");
+        }else if ((size2 != size3)) {
+            System.out.println("We cant take product of matrix1 and matrix2.\nYou can only multiply a matrix by a matrix if they are the same size or if the number of columns in the matrix1 matches the number of rows in the matrix2.");
         } else {
-
-            int[][] res = new int[size1][size4];
-            int[][] matrix1 = new int[size1][size2];
-            int[][] matrix2 = new int[size3][size4];
-            System.out.println("Enter numbers of matrix1:");
-            fillMatrix(matrix1);
-            System.out.println("Enter numbers of matrix2:");
-            fillMatrix(matrix2);
-            for (int i = 0; i < matrix1.length; i++) {
-                for (int k = 0; k < matrix2[i].length; k++) {
-                    for (int j = 0; j < matrix1[i].length; j++) {
-                        res[i][k] += matrix1[i][j] * matrix2[j][k];
+            if (size4 > 1) {
+                int[][] res = new int[size1][size4];
+                int[][] matrix1 = new int[size1][size2];
+                int[][] matrix2 = new int[size3][size4];
+                System.out.println("Enter numbers of matrix1:");
+                fillMatrix(matrix1);
+                System.out.println("Enter numbers of matrix2:");
+                fillMatrix(matrix2);
+                for (int i = 0; i < size1; i++) {
+                    for (int k = 0; k < size4; k++) {
+                        for (int j = 0; j < size3; j++) {
+                            res[i][k] += matrix1[i][j] * matrix2[j][k];
+                        }
                     }
                 }
+                System.out.println("result");
+                printMatrix(res);
+            } else {
+                ifWeHaveMatrixAndVector(size1, size2, size3);
             }
-            System.out.println("result");
-            printMatrix(res);
         }
     }
 
